@@ -1,22 +1,17 @@
 import React from "react";
 
-function GuessInput() {
+function GuessInput({ handleGuessSubmit }) {
   const [guess, setGuess] = React.useState("");
 
-  function handleSubmit() {
-    console.log({ guess });
+  function handleSubmit(event) {
+    event.preventDefault();
+    handleGuessSubmit(guess);
+    setGuess("");
   }
 
   return (
     <div>
-      <form
-        className="guess-input-wrapper"
-        onSubmit={(event) => {
-          event.preventDefault();
-          handleSubmit();
-          setGuess("");
-        }}
-      >
+      <form className="guess-input-wrapper" onSubmit={handleSubmit}>
         <label htmlFor="guess-input">Enter guess:</label>
         <input
           required
@@ -37,6 +32,7 @@ function GuessInput() {
 export default GuessInput;
 
 /* How?
--Data binding for the input: the value is the state value, and onCHangue event function
-
+-Data binding for the input: the value is the state variable, 
+and onCHangue at the input event function 
+and onSubmit at the form (event)=>
 */
